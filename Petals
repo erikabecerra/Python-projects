@@ -1,0 +1,125 @@
+
+# display details to the console
+
+
+print("Description: Programming Assignment 1 - Petals Around the Rose")
+print("This is my own work as defined by the University's Academic Misconduct Policy.")
+print("\nPetals Around the Rose\n----------------------")
+print("\nThe name of the game is 'Petals Around the Rose'. The name of the")
+print("game is important.The computer will roll five dice and ask you to")
+print("guess the score for the roll.  The score will always be zero or an")
+print("even number.  Your mission, should you choose to accept it, is to")
+print("work out how the computer calculates the score.  If you succeed in")
+print("working out the secret and guess correctly four times in a row, you")
+print("become a Potentate of the Rose.")
+
+
+
+#import the modules
+
+import random
+import dice
+
+
+#Asking user to play
+option = input("Would you like to play Petals Around the Rose [y][n]? ")
+
+
+#checking of the chosen option
+while option != "y" and option != "n":
+   print("Please enter either 'y' or 'n'.")
+   option = input("Would you like to play Petals Around the Rose [y][n]? ")
+#If user chose "n",print statement
+if option == "n":
+   print("No worries... another time perhaps... :)")
+#If user chose "y", then the game will start and code will execute
+else:
+   
+   games_played = 0
+   correct_guess = 0
+   incorrect_guess = 0
+
+   def petal_cont(die):
+           if die == 3 or die == 5:
+               return 2 or 4
+           else:
+               return 0
+
+   # Stage 4 Game will start and loop 
+   while option == "y":                
+
+       #Stage 8
+       die_cont = [0,0,0,0,0,0,0] 
+       
+       #Stage 1 & 2
+       die1 = random.randint(1,6)
+       die_cont[die1] = die_cont[die1] + 1
+       die2 = random.randint(1,6)
+       die_cont[die2] = die_cont[die2] + 1
+       die3 = random.randint(1,6)
+       die_cont[die3] = die_cont[die3] + 1
+       die4 = random.randint(1,6)
+       die_cont[die4] = die_cont[die4] + 1
+       die5 = random.randint(1,6)
+       die_cont[die5] = die_cont[die5] + 1
+ 
+       dice.display_dice(die1,die2,die3,die4,die5)
+
+       die = petal_cont(die1)
+       die += petal_cont(die2)
+       die += petal_cont(die3)
+       die += petal_cont(die4)
+       die += petal_cont(die5)
+
+       #Stage 3
+       guess = int(input("Please enter your guess for the roll: "))
+
+       if guess == die:
+           print("nWell done! You guessed it!")
+           correct_guess += 1
+       else:
+           #When die and guess is even
+           if die % 2 == 0 and guess % 2 == 0:
+               print("No sorry, it's", die, "not", guess)
+               incorrect_guess += 1
+           #When only die is even
+           elif die % 2 == 0:
+               print("No sorry, it's", die, "not", guess,"The score is always even.")
+               incorrect_guess += 1
+           #When die and guess is odd       
+           elif die % 2 != 0 and guess % 2 != 0:
+               print("No sorry, it's", die, "not", guess)
+               incorrect_guess += 1
+           #When only die is odd
+           elif die % 2 != 0:
+               print("No sorry, it's", die, "not", guess,"The score is always odd.")
+               incorrect_guess += 1
+               
+
+       #Games played cont
+       games_played += 1
+
+       #3 correct guesses in a row print statement
+       if correct_guess == 4:
+           print("Congratulations! You have worked out the secret! Make sure you don't tell anyone!n")
+         
+
+       #3 incorrect guesses in a row print statement
+       if incorrect_guess == 4:
+           print("Hint: The name of the game is important... Petals Around the Rose.n")
+           
+       #Stage 4 & 7
+       option = input("Roll dice again [y][n]? ")
+       #Verification of the chosen option
+       while (option != 'y') and (option != 'n'):
+           print("Please enter either 'y' or 'n'.")
+           option = input("Roll dice again [y][n]? ")
+
+   
+
+#Game Summary
+   print("\nGame Summary")
+   print("============")
+   print("\nYou have played",games_played,"games:")
+   print("  |--> Number of correct guesses:   ",correct_guess)
+   print("  |--> Number of incorrect guesses: ",incorrect_guess)
