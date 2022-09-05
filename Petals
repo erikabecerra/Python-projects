@@ -5,6 +5,7 @@
 print("Description: Programming Assignment 1 - Petals Around the Rose")
 print("This is my own work as defined by the University's Academic Misconduct Policy.")
 print("\nPetals Around the Rose\n----------------------")
+print("this is a new line")
 print("\nThe name of the game is 'Petals Around the Rose'. The name of the")
 print("game is important.The computer will roll five dice and ask you to")
 print("guess the score for the roll.  The score will always be zero or an")
